@@ -1,1 +1,649 @@
-Just starting here
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anna Aljanaki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1714;
+      --muted: #6b6560;
+      --rule: #d8d2cb;
+      --bg: #faf8f5;
+      --accent: #7a4f2e;
+      --accent-light: #f0e8df;
+      --mono: 'DM Mono', monospace;
+      --serif: 'EB Garamond', Georgia, serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--serif);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    /* ── LAYOUT ── */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.75rem 0;
+    }
+    nav .page {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .nav-name {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HEADER ── */
+    header {
+      padding: 5rem 0 3.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .header-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: start;
+    }
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+    .title-line {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 0.6rem;
+      margin-bottom: 1.4rem;
+    }
+    .bio {
+      font-style: italic;
+      color: #3d3a37;
+      max-width: 580px;
+      font-size: 1.05rem;
+    }
+    .contact-links {
+      margin-top: 1.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.2rem;
+    }
+    .contact-links a {
+      font-family: var(--mono);
+      font-size: 0.73rem;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .contact-links a:hover { color: var(--accent); border-color: var(--accent); }
+
+    .avatar-placeholder {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      border: 2px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.4;
+    }
+    /* Replace the placeholder with a real img: <img src="photo.jpg" class="avatar" /> */
+    .avatar {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--rule);
+      flex-shrink: 0;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    section:last-child { border-bottom: none; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 1.55rem;
+      font-weight: 400;
+      margin-bottom: 1.2rem;
+    }
+
+    /* ── TEAM ── */
+    .team-group { margin-bottom: 2rem; }
+    .team-group-title {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .team-card {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--accent-light);
+    }
+    .team-card:last-child { border-bottom: none; }
+    .team-name { font-weight: 500; }
+    .team-project { font-style: italic; color: var(--muted); font-size: 0.95rem; }
+
+    /* ── GRANT ── */
+    .grant-box {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      padding: 1.4rem 1.6rem;
+      border-radius: 0 6px 6px 0;
+    }
+    .grant-box h3 { font-weight: 500; margin-bottom: 0.4rem; }
+    .grant-box p { font-size: 0.95rem; color: #3d3a37; }
+
+    /* ── TEACHING ── */
+    .course {
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--accent-light);
+    }
+    .course:last-child { border-bottom: none; }
+    .course-name { font-weight: 500; }
+    .course-meta {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.3rem;
+    }
+    .course-desc { font-size: 0.93rem; color: #3d3a37; font-style: italic; }
+
+    /* ── THESES ── */
+    .thesis {
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--accent-light);
+      display: grid;
+      grid-template-columns: 3.5rem 1fr;
+      gap: 0.6rem;
+    }
+    .thesis:last-child { border-bottom: none; }
+    .thesis-year {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      padding-top: 0.2rem;
+    }
+    .thesis-title { font-size: 0.95rem; line-height: 1.5; }
+    .thesis-author {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      margin-top: 0.1rem;
+    }
+    .thesis-type {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+    }
+
+    /* ── PUBLICATIONS ── */
+    .pub {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--accent-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .pub:last-child { border-bottom: none; }
+    .pub-venue {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+    }
+    .pub strong { color: var(--accent); }
+    .pub a { color: var(--accent); text-decoration: none; }
+    .pub a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 0;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 600px) {
+      .header-inner { grid-template-columns: 1fr; }
+      .avatar-placeholder { display: none; }
+      .thesis { grid-template-columns: 1fr; }
+      .thesis-year { display: inline; margin-right: 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="page">
+    <a class="nav-name" href="#top">Anna Aljanaki</a>
+    <ul class="nav-links">
+      <li><a href="#research">Research</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#theses">Theses</a></li>
+      <li><a href="#publications">Publications</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HEADER ── -->
+<header id="top">
+  <div class="page">
+    <div class="header-inner">
+      <div>
+        <h1>Anna Aljanaki</h1>
+        <p class="title-line">Professor of Computational Methods in Time-Based Arts &amp; Musicology</p>
+        <p class="bio">
+          I work at the intersection of artificial intelligence, music perception, and computational creativity —
+          with a focus on music emotion recognition, symbolic music analysis, generative music systems,
+          and digital musicology.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:anna.aljanaki@kug.at">anna.aljanaki@kug.at</a>
+          <a href="https://scholar.google.com/citations?user=EAqMLloAAAAJhl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://github.com/aljanaki" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <p style="font-family:var(--mono);font-size:0.72rem;color:var(--muted);margin-top:1rem;">
+          Institute of Electronic Music and Acoustics · University of Music and Performing Arts Graz, Austria
+        </p>
+      </div>
+      <!-- To add your photo, replace the div below with:
+           <img src="photo.jpg" alt="Anna Aljanaki" class="avatar" /> -->
+      <div class="avatar-placeholder">photo<br/>goes<br/>here</div>
+    </div>
+  </div>
+</header>
+
+<!-- ── RESEARCH ── -->
+<section id="research">
+  <div class="page">
+    <p class="section-label">Current Research</p>
+
+    <p style="margin-top:1.8rem; color:#3d3a37; font-size:0.97rem;">
+      My broader research spans <strong>music emotion recognition</strong>, symbolic music analysis,
+      generative music systems, and digital musicology — often in collaboration with
+      ethnomusicologists and artists.
+      I obtained my PhD from Utrecht University (2016) on machine learning methods
+      applied to music emotion recognition, and subsequently held positions at
+      the University of Geneva, Johannes Kepler University Linz, and the University of Tartu.
+    </p>
+	
+	    <div class="grant-box">
+      <h3>TemTa grant: NeuroNose</h3>
+      <p>
+        <em>Detecting volatile biomarkers for neurodegenerative disease detection</em><br/>
+        Funded by the Estonian Research Council (TemTa grant, 2024).
+        The project applies machine learning to mass spectrometry and sensor array data
+        to identify olfactory biomarkers associated with neurodegenerative diseases.
+      </p>
+    </div>
+
+	
+  </div>
+</section>
+
+<!-- ── TEAM ── -->
+<section id="team">
+  <div class="page">
+    <p class="section-label">Team</p>
+
+    <div class="team-group">
+      <p class="team-group-title">PhD Students</p>
+
+      <div class="team-card">
+        <span class="team-name">Yan-Martin Tamm</span>
+        <span class="team-project">Disentangled embeddings of music similarity for personalized recommendations</span>
+      </div>
+
+      <div class="team-card">
+        <span class="team-name">Zofia Mizgalewicz</span>
+        <span class="team-project">Detecting volatile biomarkers using mass spectrometry and sensor array data with machine learning</span>
+      </div>
+    </div>
+
+    <div class="team-group">
+      <p class="team-group-title">Master Students</p>
+
+      <div class="team-card">
+        <span class="team-name">Lisette Ant</span>
+        <span class="team-project">Computational analysis of singing voice characteristics in Finno-Ugric traditional singing</span>
+      </div>
+
+      <div class="team-card">
+        <span class="team-name">Hannes Arumäe</span>
+        <span class="team-project">Explainable transformer models on symbolic music</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TEACHING ── -->
+<section id="teaching">
+  <div class="page">
+    <p class="section-label">Teaching</p>
+
+    <div class="course">
+      <p class="course-meta">KUG · Current</p>
+      <p class="course-name">Digital Musicology</p>
+      <p class="course-desc">
+        Computational methods for musical data analysis: corpus building, data annotation,
+        symbolic formats (MusicXML, MIDI, kern), digital signal processing, and tools
+        including music21, Essentia, librosa, and Sonic Visualiser.
+      </p>
+    </div>
+
+    <div class="course">
+      <p class="course-meta">University of Tartu · 2021–2025 · 6 EAP</p>
+      <p class="course-name">Music Information Retrieval</p>
+      <p class="course-desc">
+        Machine learning applied to MIR tasks: music generation, classification, recommendation,
+        source separation, symbolic music processing, and digital musicology.
+        New course created for the Data Science curriculum.
+      </p>
+    </div>
+
+    <div class="course">
+      <p class="course-meta">University of Tartu · 2021–2025</p>
+      <p class="course-name">Introduction to Data Science</p>
+      <p class="course-desc">
+        Practical data science for conversion master students (students transitioning from other disciplines into IT).
+      </p>
+    </div>
+
+    <div class="course">
+      <p class="course-meta">University of Tartu · 2022–2025</p>
+      <p class="course-name">Machine Learning</p>
+      <p class="course-desc">
+        Core machine learning course for the conversion master program.
+      </p>
+    </div>
+
+    <div style="margin-top:1.6rem; padding:1rem 1.2rem; background:var(--accent-light); border-radius:6px; font-size:0.9rem;">
+      <strong>Textbook:</strong> <em>Practical Data Science</em> (Praktiline andmeteadus) —
+      co-authored with E. Sügis, A. Tampuu, M. Fišel, and M. Kull. 2025.
+    </div>
+  </div>
+</section>
+
+<!-- ── THESES ── -->
+<section id="theses">
+  <div class="page">
+    <p class="section-label">Supervised Theses</p>
+
+    <div class="thesis">
+      <span class="thesis-year">2025</span>
+      <div>
+        <p class="thesis-title">Applying MIR to the study of folk music on the basis of folk song archive</p>
+        <p class="thesis-author">Tanel Torn</p>
+        <p class="thesis-type">Master thesis · Ethnomusicology · University of Tartu</p>
+      </div>
+    </div>
+
+    <div class="thesis">
+      <span class="thesis-year">2025</span>
+      <div>
+        <p class="thesis-title">Detecting and mitigating data drift in call center data</p>
+        <p class="thesis-author">Desiree Himuskin</p>
+        <p class="thesis-type">Thesis · University of Tartu</p>
+      </div>
+    </div>
+
+    <div class="thesis">
+      <span class="thesis-year">2024</span>
+      <div>
+        <p class="thesis-title">Audio Transformations Based Explanations (ATBE) for Deep Learning Models Trained on Musical Data</p>
+        <p class="thesis-author">Cheng-Han Chung</p>
+        <p class="thesis-type">Master thesis · University of Tartu</p>
+      </div>
+    </div>
+
+    <div class="thesis">
+      <span class="thesis-year">2024</span>
+      <div>
+        <p class="thesis-title">Music accompaniment generation with Generative Adversarial Neural Networks</p>
+        <p class="thesis-author">Priidik Meelo Västrik</p>
+        <p class="thesis-type">Bachelor thesis · University of Tartu</p>
+      </div>
+    </div>
+
+    <div class="thesis">
+      <span class="thesis-year">2024</span>
+      <div>
+        <p class="thesis-title">Drone Sound Recognition and Tracking System Using Machine Learning</p>
+        <p class="thesis-author">Roman Karpenko</p>
+        <p class="thesis-type">Master thesis · University of Tartu</p>
+      </div>
+    </div>
+
+    <div class="thesis">
+      <span class="thesis-year">2024</span>
+      <div>
+        <p class="thesis-title">Bakterite eristamine fluoromeetri spektrist masinõppe abil</p>
+        <p class="thesis-author">Rimmo Rõõm (co-supervisor: Ott Rebane)</p>
+        <p class="thesis-type">Master thesis · University of Tartu</p>
+      </div>
+    </div>
+
+    <div class="thesis">
+      <span class="thesis-year">2024</span>
+      <div>
+        <p class="thesis-title">Inspektor-kontaktisikute töökoormuse analüüs ja töölaua loomine vanglateenistuses</p>
+        <p class="thesis-author">Lea Tuberik</p>
+        <p class="thesis-type">Master thesis · University of Tartu</p>
+      </div>
+    </div>
+
+    <div class="thesis">
+      <span class="thesis-year">2024</span>
+      <div>
+        <p class="thesis-title">Eesti regionaalsete majandusandmete visualiseerimiseks töölaua lahenduse loomine</p>
+        <p class="thesis-author">Asso Uibo</p>
+        <p class="thesis-type">Master thesis · University of Tartu</p>
+      </div>
+    </div>
+
+    <div class="thesis">
+      <span class="thesis-year">2023</span>
+      <div>
+        <p class="thesis-title">Music augmentation in genre classification models</p>
+        <p class="thesis-author">Raivo Kasepuu</p>
+        <p class="thesis-type">Master thesis · University of Tartu</p>
+      </div>
+    </div>
+
+    <div class="thesis">
+      <span class="thesis-year">2022</span>
+      <div>
+        <p class="thesis-title">NLP for music similarity</p>
+        <p class="thesis-author">Mait Lindpere</p>
+        <p class="thesis-type">Master thesis · University of Tartu</p>
+      </div>
+    </div>
+
+    <div class="thesis">
+      <span class="thesis-year">2022</span>
+      <div>
+        <p class="thesis-title">Puiduettevõtte protsesside optimiseerimine andmeteaduse abil</p>
+        <p class="thesis-author">Richard Nõmm</p>
+        <p class="thesis-type">Master thesis · University of Tartu</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── PUBLICATIONS ── -->
+<section id="publications">
+  <div class="page">
+    <p class="section-label">Selected Publications</p>
+
+    <div class="pub">
+      <p class="pub-venue">Digital Humanities in the Nordic and Baltic Countries · 2024</p>
+      <p>Lisniak, I., <strong>Aljanaki, A.</strong>, &amp; Efremova, L. A Corpus of Ukrainian Folk Songs from Podillia.
+      <em>DHNB Publications</em>, 7(2), 1–11. DOI: 10.5617/dhnbpub.12305.</p>
+    </div>
+
+    <div class="pub">
+      <p class="pub-venue">NLP4MusA Workshop · 2024</p>
+      <p><strong>Aljanaki, A.</strong> Genre-conformity in the topics of lyrics and song popularity.
+      <em>3rd Workshop on NLP for Music and Audio</em>, pp. 1–4.</p>
+    </div>
+
+    <div class="pub">
+      <p class="pub-venue">ACM RecSys · 2024</p>
+      <p>Tamm, Y-M. &amp; <strong>Aljanaki, A.</strong> Comparative analysis of pretrained audio representations in music recommender systems.
+      <em>18th ACM Conference on Recommender Systems</em>, pp. 934–938.</p>
+    </div>
+
+    <div class="pub">
+      <p class="pub-venue">AI Music Creativity · 2022</p>
+      <p><strong>Aljanaki, A.</strong> Attitude towards and evaluation of computer-generated music in music listeners and musicians.
+      <em>3rd Conference on AI Music Creativity</em>.</p>
+    </div>
+
+    <div class="pub">
+      <p class="pub-venue">Empirical Musicology Review · 2021</p>
+      <p><strong>Aljanaki, A.</strong>, Kalonaris, S., Micchi, G., &amp; Nichols, E.
+      MCMA: A symbolic multitrack contrapuntal music archive.
+      <em>Empirical Musicology Review</em>, 16(1):99–105.</p>
+    </div>
+
+    <div class="pub">
+      <p class="pub-venue">ISMIR · 2020</p>
+      <p>Cancino-Chacón, C., Peter, S., Chowdhury, S., <strong>Aljanaki, A.</strong>, &amp; Widmer, G.
+      On the characterization of expressive performance in classical music: First results of the con espressione game.
+      <em>ISMIR 2020</em>.</p>
+    </div>
+
+    <div class="pub">
+      <p class="pub-venue">ISMIR · 2018</p>
+      <p><strong>Aljanaki, A.</strong> &amp; Soleymani, M. A data-driven approach to mid-level perceptual musical feature modeling.
+      <em>International Society for Music Information Retrieval</em>.</p>
+    </div>
+
+    <div class="pub">
+      <p class="pub-venue">PLoS ONE · 2017</p>
+      <p><strong>Aljanaki, A.</strong>, Yang, Y-H., &amp; Soleymani, M.
+      Developing a benchmark for emotional analysis of music.
+      <em>PLoS ONE</em>, 12(3):e0173392.</p>
+    </div>
+
+    <div class="pub">
+      <p class="pub-venue">Information Processing &amp; Management · 2016</p>
+      <p><strong>Aljanaki, A.</strong>, Wiering, F., &amp; Veltkamp, R.C.
+      Studying emotion induced by music through a crowdsourcing game.
+      <em>Information Processing &amp; Management</em>, 52(1):115–128.</p>
+    </div>
+
+    <div class="pub">
+      <p class="pub-venue">ISMIR · 2015</p>
+      <p><strong>Aljanaki, A.</strong>, Wiering, F., &amp; Veltkamp, R.C.
+      Emotion based segmentation of musical audio.
+      <em>ISMIR 2015</em>, pp. 770–776.</p>
+    </div>
+
+    <div class="pub">
+      <p class="pub-venue">PhD Thesis · Utrecht University · 2016</p>
+      <p><strong>Aljanaki, A.</strong> <em>Emotion in Music: representation and computational modeling.</em>
+      Utrecht University.</p>
+    </div>
+
+    <p style="margin-top:1.4rem; font-family:var(--mono); font-size:0.72rem; color:var(--muted);">
+      Full list on
+      <a href="https://scholar.google.com/citations?user=EAqMLloAAAAJhl=en" target="_blank" rel="noopener"
+         style="color:var(--accent); text-decoration:none; border-bottom:1px solid var(--rule); padding-bottom:1px;">
+        Google Scholar ↗
+      </a>
+    </p>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="page">
+    Anna Aljanaki · Institute of Electronic Music and Acoustics · KUG Graz · anna.aljanaki@kug.at
+  </div>
+</footer>
+
+</body>
+</html>
